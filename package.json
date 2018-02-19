@@ -1,0 +1,25 @@
+{
+  "name": "chilepool-bot",
+  "version": "0.0.1",
+  "description": "ChilePool.cl Telegram Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Nothing here!\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "chatbot",
+    "nodejs",
+    "telegram"
+  ],
+  "author": {
+    "name": "Osman H.",
+    "url": "http://www.chilepool.cl"
+  },
+  "license": "GPL",
+  "dependencies": {
+    "telegram-node-bot": "^4.0.3",
+    "request": "*",
+    "numeral": "*"
+  }
+}
