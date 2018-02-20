@@ -21,5 +21,9 @@
     "telegram-node-bot": "^4.0.3",
     "request": "*",
     "numeral": "*"
+  },
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/username/repository.git"
   }
 }
