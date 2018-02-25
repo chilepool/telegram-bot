@@ -5,15 +5,17 @@ const Telegram = require('telegram-node-bot'),
         workers: 1
     });
 
-const   LukaNetworkController = require('./controllers/LukaNetworkController'),
+const   NetworkStatsController = require('./controllers/NetworkStatsController'),
         OtherwiseController = require('./controllers/OtherwiseController');
 
-const lukaNetworkController = new LukaNetworkController();
+const networkStatsController = new NetworkStatsController();
 const otherwiseController = new OtherwiseController();
 
-tg.router.when(new Telegram.TextCommand('/luka', 'getLukaStats'), lukaNetworkController)
-        .when(new Telegram.TextCommand('/help', 'getHelp'), lukaNetworkController)
-	.otherwise(otherwiseController);
+tg.router	.when(new Telegram.TextCommand('/luka',	  'getLukaStats'),   networkStatsController)
+			.when(new Telegram.TextCommand('/prosus', 'getProsusStats'), networkStatsController)
+			.when(new Telegram.TextCommand('/ento',   'getEntoStats'), 	 networkStatsController)
+        	.when(new Telegram.TextCommand('/help',   'getHelp'), 		 networkStatsController)
+			.otherwise(otherwiseController);
 
 function exitHandler(exitCode) {
     process.exit(exitCode);

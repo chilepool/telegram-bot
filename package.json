@@ -4,7 +4,7 @@
   "description": "ChilePool.cl Telegram Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Nothing here!\" && exit 1",
+    "test": "echo \"Nothing here yet!\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [
@@ -16,10 +16,15 @@
     "name": "Osman H.",
     "url": "http://www.chilepool.cl"
   },
-  "license": "GPL",
+  "license": {
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  },
   "dependencies": {
-    "telegram-node-bot": "^4.0.3",
+    "mocha": "^5.0.1",
+    "numeral": "*",
     "request": "*",
-    "numeral": "*"
+    "sinon": "^4.4.2",
+    "telegram-node-bot": "^4.0.3"
   }
 }
