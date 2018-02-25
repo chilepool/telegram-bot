@@ -4,7 +4,7 @@
   "description": "ChilePool.cl Telegram Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Nothing here yet!\" && exit 1",
+    "test": "echo \"Nothing here yet!\"",
     "start": "node index.js"
   },
   "keywords": [
