@@ -4,7 +4,7 @@ ChilePoolBot (BETA)
 Bot para Telegram que entrega informacion relevante sobre la red de varias Cryptomonedas Chilenas.
 
 ### Status
-[![Build Status](https://api.travis-ci.org/chilepool/telegram-bot.svg?branch=master)](https://github.com/chilepool/telegram-bot)
+[![Build Status](https://travis-ci.org/chilepool/telegram-bot.svg?branch=master)](https://github.com/chilepool/telegram-bot)
 
 
 ### Uso
