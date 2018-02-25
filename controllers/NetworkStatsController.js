@@ -25,7 +25,7 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
     
     //TODO: To be refactored so we can use a single call with arguments for each coin
     getLukaStats($) {
-        statsFetcher.getStats().then((message) => { 
+        statsFetcher.getLukaStats().then((message) => { 
             return $.sendMessage(message, { parse_mode: 'Markdown' });
         }, (error) => {
             console.log(error);
