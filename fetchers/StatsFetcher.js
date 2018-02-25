@@ -5,7 +5,7 @@ const numeral = require('numeral');
 
 class StatsFetcher {
 
-    //TODO: we could just have one call with multiple arguments
+    //TODO: we could just have one call with multiple arguments?
     getLukaStats(){
         console.log('Getting the stats for LuKa...');
         return new Promise((resolve, reject) => {
