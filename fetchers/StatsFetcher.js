@@ -62,6 +62,25 @@ class StatsFetcher {
             });
         });
     }
+    
+    getChauchaStats(){
+        console.log('Getting the stats for Prosus...');
+        return new Promise((resolve, reject) => {
+            request('http://artesa.chaucha.cl/public/index.php?page=api&action=getdashboarddata&api_key=4905446471ace8eb2c8daf839e337f8d8951b63453cc77c054368aea21a3d114&id=57', (error, response, body) => {
+                console.log('Error: ' + error);
+                console.log('Status: ' + response.statusCode);
+                if (!error && response.statusCode == 200){
+                    var obj = JSON.parse(body);
+                    console.log(obj.network);
+                    var message = this.formatMessage(obj.getdashboarddata.data.network, null, 'Chaucha', 0);
+                    resolve(message);
+                } else {
+                    console.log('Something went wrong!');
+                    reject(error);
+                }
+            });
+        });
+    }    
 
     //TODO: This could be a separated utility?
     formatMessage(network,config,  moneda, hash){
@@ -80,14 +99,24 @@ class StatsFetcher {
         else if (network.difficulty > 400000000 && network.difficulty <= 500000000) diffEmoji = '\u26C8';
         else if (network.difficulty > 500000000) diffEmoji = '\u{1F480}';
 
-        var message =   '*Estadísticas de '+ moneda +'*\n' +
+        var message = '';
+        
+        if(moneda=='Chaucha'){
+            message =   '*Estadísticas de '+ moneda +'*\n' +
+                        'Hash Rate: ' + numeral(network.hashrate).format('0.00') + 'TH/sec \u{1F682}\n' +
+                        'Dificultad: ' + numeral(network.difficulty).format('0.00') + 'K ' + diffEmoji + '\n' +
+                        'Altura: ' + numeral(network.block).format('0,0') + ' \u23EB\n'+
+                        'Recompensa: ' +  numeral(network.esttimeperblock).format('0,0.0000') + ' ' + 'CHA' + ' \u{1F4B0}\n';
+        }else{
+            message =   '*Estadísticas de '+ moneda +'*\n' +
                         'Hash Rate: ' + numeral((network.difficulty/config.coinDifficultyTarget)/divisorHR).format('0.00') + unidadHR+'H/sec \u{1F682}\n' +
                         'Dificultad: ' + numeral(network.difficulty/1000000).format('0.00') + 'M ' + diffEmoji + '\n' +
-                        'Altura: ' + numeral(network.height).format('0,0') + ' \u23EB\n' +
-                        'Recompensa: ' +  numeral(network.reward/100000000).format('0,0.0000') + ' ' + config.symbol + ' \u{1F4B0}\n' 
+                        'Altura: ' + numeral(network.height).format('0,0') + ' \u23EB\n'+
+                        'Recompensa: ' +  numeral(network.reward/100000000).format('0,0.0000') + ' ' + config.symbol + ' \u{1F4B0}\n';            
+        }
 
-        if(hash==1)
-                message = message + 'Hash: [' + network.hash.toString().substring(0,12) + '...](http://www.chilepool.cl/luka-explorer/?hash=' + network.hash + '#blockchain_block';
+       if(hash==1)
+           message = message + 'Hash: [' + network.hash.toString().substring(0,12) + '...](http://www.chilepool.cl/luka-explorer/?hash=' + network.hash + '#blockchain_block';
             
         return message;
     }
