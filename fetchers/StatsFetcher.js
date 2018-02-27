@@ -64,14 +64,14 @@ class StatsFetcher {
     }
     
     getChauchaStats(){
-        console.log('Getting the stats for Prosus...');
+        console.log('Getting the stats for Chaucha...');
         return new Promise((resolve, reject) => {
             request('http://artesa.chaucha.cl/public/index.php?page=api&action=getdashboarddata&api_key=4905446471ace8eb2c8daf839e337f8d8951b63453cc77c054368aea21a3d114&id=57', (error, response, body) => {
                 console.log('Error: ' + error);
                 console.log('Status: ' + response.statusCode);
                 if (!error && response.statusCode == 200){
                     var obj = JSON.parse(body);
-                    console.log(obj.network);
+                    console.log(obj.getdashboarddata.data.network);
                     var message = this.formatMessage(obj.getdashboarddata.data.network, null, 'Chaucha', 0);
                     resolve(message);
                 } else {
@@ -88,11 +88,12 @@ class StatsFetcher {
 
         var divisorHR = 1000000; //Por defecto pasara a MH
         var unidadHR  = 'M';
-
-        if((network.difficulty/config.coinDifficultyTarget)<1000000){
-            divisorHR = 1000;
-            unidadHR = 'K';
-        }
+	if(moneda != 'Chaucha'){
+            if((network.difficulty/config.coinDifficultyTarget)<1000000){
+                divisorHR = 1000;
+                unidadHR = 'K';
+            }
+	}
 
         //TODO: Are all these difficulties the same for every coin?
         if (network.difficulty > 300000000 && network.difficulty <= 400000000) diffEmoji = '\u26C5';
@@ -103,7 +104,7 @@ class StatsFetcher {
         
         if(moneda=='Chaucha'){
             message =   '*Estadísticas de '+ moneda +'*\n' +
-                        'Hash Rate: ' + numeral(network.hashrate).format('0.00') + 'TH/sec \u{1F682}\n' +
+                        'Hash Rate: ' + numeral(network.hashrate).format('0.00') + 'GH/sec \u{1F682}\n' +
                         'Dificultad: ' + numeral(network.difficulty).format('0.00') + 'K ' + diffEmoji + '\n' +
                         'Altura: ' + numeral(network.block).format('0,0') + ' \u23EB\n'+
                         'Recompensa: ' +  numeral(network.esttimeperblock).format('0,0.0000') + ' ' + 'CHA' + ' \u{1F4B0}\n';
