@@ -12,6 +12,7 @@ Con el bot en el grupo ejecuta:
 - /prosus para informacion sobre la red Prosus
 - /luka para informacion sobre la red Luka
 - /ento para informacion sobre la red Ento
+- /chaucha para informacion sobre la red Chaucha
 - /help para obtener informacion sobre el bot y su uso
 
 ### Herramientas de desarrollo

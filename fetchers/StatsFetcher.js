@@ -83,17 +83,17 @@ class StatsFetcher {
     }    
 
     //TODO: This could be a separated utility?
-    formatMessage(network,config,  moneda, hash){
+    formatMessage(network, config, moneda, hash){
         var diffEmoji = '\u2600';
 
         var divisorHR = 1000000; //Por defecto pasara a MH
         var unidadHR  = 'M';
-	if(moneda != 'Chaucha'){
+        if(moneda != 'Chaucha'){
             if((network.difficulty/config.coinDifficultyTarget)<1000000){
                 divisorHR = 1000;
                 unidadHR = 'K';
             }
-	}
+        }
 
         //TODO: Are all these difficulties the same for every coin?
         if (network.difficulty > 300000000 && network.difficulty <= 400000000) diffEmoji = '\u26C5';
