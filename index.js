@@ -15,12 +15,12 @@ const   NetworkStatsController = require('./controllers/NetworkStatsController')
 const networkStatsController = new NetworkStatsController();
 const otherwiseController = new OtherwiseController();
 
-tg.router.when(new Telegram.TextCommand('/luka',    'getLukaStats'),   networkStatsController)
-         .when(new Telegram.TextCommand('/prosus',  'getProsusStats'), networkStatsController)
-         .when(new Telegram.TextCommand('/ento',    'getEntoStats'),   networkStatsController)
-         .when(new Telegram.TextCommand('/chaucha', 'getChauchaStats'),networkStatsController)
-         .when(new Telegram.TextCommand('/bitcheke','getChauchaStats'),networkStatsController)
-         .when(new Telegram.TextCommand('/help',    'getHelp'),        networkStatsController)
+tg.router.when(new Telegram.TextCommand('/luka',    'getLukaStats'),    networkStatsController)
+         .when(new Telegram.TextCommand('/prosus',  'getProsusStats'),  networkStatsController)
+         .when(new Telegram.TextCommand('/ento',    'getEntoStats'),    networkStatsController)
+         .when(new Telegram.TextCommand('/chaucha', 'getChauchaStats'), networkStatsController)
+         .when(new Telegram.TextCommand('/bitcheke','getBitchekeStats'),networkStatsController)
+         .when(new Telegram.TextCommand('/help',    'getHelp'),         networkStatsController)
          .otherwise(otherwiseController);
 
 function exitHandler(exitCode) {
