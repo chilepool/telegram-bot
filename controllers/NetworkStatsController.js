@@ -11,6 +11,7 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
             'getEntoStats': 'getEntoStats',
             'getProsusStats': 'getProsusStats', 
             'getChauchaStats': 'getChauchaStats', 
+            'getBitchekeStats': 'getBitchekeStats', 
             'getHelp': 'getHelp'
         };
     }    
@@ -23,6 +24,11 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
                     '/prosus Estadistica de *PROSUS*\n'+
                     '/chaucha Estadistica de *CHAUCHA*\n';         
         return $.sendMessage(help, { parse_mode: 'Markdown' });
+    }
+
+    getBitchekeStats($) {
+        var stats =  '\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}';         
+        return $.sendMessage(stats, { parse_mode: 'Markdown' });
     }
     
     //TODO: To be refactored so we can use a single call with arguments for each coin
