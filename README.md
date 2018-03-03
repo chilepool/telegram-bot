@@ -1,6 +1,5 @@
 ChilePoolBot (BETA)
 ===================
-
 Bot para Telegram que entrega informacion relevante sobre la red de varias Cryptomonedas Chilenas.
 
 ### Status
@@ -13,6 +12,8 @@ Con el bot en el grupo ejecuta:
 - /luka para informacion sobre la red Luka
 - /ento para informacion sobre la red Ento
 - /chaucha para informacion sobre la red Chaucha
+- /bitcheke para informacion sobre la red bitcheke (?)
+- /profit <crypto> <hashrate> <unidad> para informacion sobre profitability
 - /help para obtener informacion sobre el bot y su uso
 
 ### Herramientas de desarrollo

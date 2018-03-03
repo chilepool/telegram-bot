@@ -80,7 +80,7 @@ class StatsFetcher {
                 }
             });
         });
-    }    
+    }
 
     //TODO: This could be a separated utility?
     formatMessage(network, config, moneda, hash){
@@ -120,6 +120,52 @@ class StatsFetcher {
            message = message + 'Hash: [' + network.hash.toString().substring(0,12) + '...](http://www.chilepool.cl/luka-explorer/?hash=' + network.hash + '#blockchain_block';
             
         return message;
+    }
+
+    getLukaProfits(args){
+        var hr  = args[2];
+        var units = args[3];
+        var exp = -1;
+
+        if (isNaN(hr)) {
+            return new Promise((resolve, reject) => {
+                reject('Wrong number format: ' + hr);
+            });
+        }
+
+        if(units === 'H') {
+            exp = 0;
+        } else if(units === 'KH') {
+            exp = 1;
+        } else if(units === 'MH') {
+            exp = 2;
+        } else {
+            return new Promise((resolve, reject) => { 
+                reject('Wrong hashrate unit: ' + units);
+            });
+        }
+
+        console.log('Getting the stats for LuKa...');
+        return new Promise((resolve, reject) => {
+            request('http://luka.chilepool.cl:8117/stats', (error, response, body) => {
+                console.log('Error: ' + error); 
+                console.log('Status: ' + response.statusCode);
+                if (!error && response.statusCode == 200){
+                    var obj = JSON.parse(body);
+                    var rateUnit = Math.pow(1024,parseInt(exp));
+                    var hashRate = parseFloat(hr) * rateUnit;
+                    var profit = (hashRate * 86400 / obj.network.difficulty) * obj.network.reward;
+                    var message = '';
+                    if(profit) {
+                        message = 'Profit estimado: *'+  numeral(profit/100000000).format('0.00') +'* LUK/dia';
+                    }
+                    resolve(message);
+                } else {
+                    console.log('Something went wrong!');
+                    reject(error);
+                }
+            });
+        });
     }
 }
 
