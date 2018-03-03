@@ -20,6 +20,7 @@ tg.router.when(new Telegram.TextCommand('/luka',    'getLukaStats'),    networkS
          .when(new Telegram.TextCommand('/ento',    'getEntoStats'),    networkStatsController)
          .when(new Telegram.TextCommand('/chaucha', 'getChauchaStats'), networkStatsController)
          .when(new Telegram.TextCommand('/bitcheke','getBitchekeStats'),networkStatsController)
+         .when(new Telegram.TextCommand('/profit',  'getProfits'),      networkStatsController)
          .when(new Telegram.TextCommand('/help',    'getHelp'),         networkStatsController)
          .otherwise(otherwiseController);
 

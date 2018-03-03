@@ -12,6 +12,7 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
             'getProsusStats': 'getProsusStats', 
             'getChauchaStats': 'getChauchaStats', 
             'getBitchekeStats': 'getBitchekeStats', 
+            'getProfits': 'getProfits', 
             'getHelp': 'getHelp'
         };
     }    
@@ -66,7 +67,19 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
         }, (error) => {
             console.log(error);
         });
-    }    
+    }
+
+    getProfits($) {
+        // /profit LUK 80 KH  => {'/profit', 'LUK', '80', 'KH'}
+        var args = $.message.text.toUpperCase().split(' ');
+        if (args[1] === 'LUK' || args[1] === 'LUKA') {
+            statsFetcher.getLukaProfits(args).then((message) => {
+                return $.sendMessage(message, { parse_mode: 'Markdown' });
+            }, (error) => {
+                console.log(error);
+            });
+        }
+    }
 }
 
 module.exports = NetworkStatsController;
