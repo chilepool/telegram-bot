@@ -25,16 +25,22 @@ class StatsFetcher {
         });
     }
 
-    getEntoStats(){
-        console.log('Getting the stats for Ento...');
+    getLukaPrice(coin){
+        console.log('Getting the price of LuKa...');
         return new Promise((resolve, reject) => {
-            request('http://178.32.129.122:8117/stats', (error, response, body) => {
+            request('https://simplepay.cl/api/exchange/luk-clp', (error, response, body) => {
                 console.log('Error: ' + error);
                 console.log('Status: ' + response.statusCode);
                 if (!error && response.statusCode == 200){
                     var obj = JSON.parse(body);
-                    console.log(obj.network);
-                    var message = this.formatMessage(obj.network, obj.config, 'Ento', 0);
+                    console.log(obj);
+                    var variationStock = numeral(obj.stats.variation).format('0.00') > 0? '\u{1F4C8}' : '\u{1F4C9}';//1F4C9
+                    var message =   '*Valor de LuKa '     + numeral(obj.market).format('0,0') + ' CLP * \u{1F4B5}\ \n'   +
+                                    'Precio compra: *'    +  numeral(obj.sell).format('0,0') +'* CLP \u{2705}\n' +
+                                    'Precio venta: *'     +  numeral(obj.buy).format('0,0')  +'* CLP \u{274C}\n' +
+                                    'Volumen transado: *' +  numeral(obj.stats.volume).format('0,0') +'* LUKs \u{1F4B8}\n' +
+                                    'Variación: *'        +  numeral(obj.stats.variation).format('0.00') +'%* ' + variationStock;
+                    console.log(message);
                     resolve(message);
                 } else {
                     console.log('Something went wrong!');
@@ -62,7 +68,7 @@ class StatsFetcher {
             });
         });
     }
-    
+
     getChauchaStats(){
         console.log('Getting the stats for Chaucha...');
         return new Promise((resolve, reject) => {
@@ -101,7 +107,7 @@ class StatsFetcher {
         else if (network.difficulty > 500000000) diffEmoji = '\u{1F480}';
 
         var message = '';
-        
+
         if(moneda=='Chaucha'){
             message =   '*Estadísticas de '+ moneda +'*\n' +
                         'Hash Rate: ' + numeral(network.hashrate).format('0.00') + 'GH/sec \u{1F682}\n' +
@@ -113,12 +119,12 @@ class StatsFetcher {
                         'Hash Rate: ' + numeral((network.difficulty/config.coinDifficultyTarget)/divisorHR).format('0.00') + unidadHR+'H/sec \u{1F682}\n' +
                         'Dificultad: ' + numeral(network.difficulty/1000000).format('0.00') + 'M ' + diffEmoji + '\n' +
                         'Altura: ' + numeral(network.height).format('0,0') + ' \u23EB\n'+
-                        'Recompensa: ' +  numeral(network.reward/100000000).format('0,0.0000') + ' ' + config.symbol + ' \u{1F4B0}\n';            
+                        'Recompensa: ' +  numeral(network.reward/100000000).format('0,0.0000') + ' ' + config.symbol + ' \u{1F4B0}\n';
         }
 
        if(hash==1)
            message = message + 'Hash: [' + network.hash.toString().substring(0,12) + '...](http://www.chilepool.cl/luka-explorer/?hash=' + network.hash + '#blockchain_block';
-            
+
         return message;
     }
 
@@ -140,7 +146,7 @@ class StatsFetcher {
         } else if(units === 'MH') {
             exp = 2;
         } else {
-            return new Promise((resolve, reject) => { 
+            return new Promise((resolve, reject) => {
                 reject('Wrong hashrate unit: ' + units);
             });
         }
@@ -148,7 +154,7 @@ class StatsFetcher {
         console.log('Getting the stats for LuKa...');
         return new Promise((resolve, reject) => {
             request('http://luka.chilepool.cl:8117/stats', (error, response, body) => {
-                console.log('Error: ' + error); 
+                console.log('Error: ' + error);
                 console.log('Status: ' + response.statusCode);
                 if (!error && response.statusCode == 200){
                     var obj = JSON.parse(body);

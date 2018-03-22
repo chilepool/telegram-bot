@@ -10,10 +10,10 @@ Bot para Telegram que entrega informacion relevante sobre la red de varias Crypt
 Con el bot en el grupo ejecuta:
 - /prosus para informacion sobre la red Prosus
 - /luka para informacion sobre la red Luka
-- /ento para informacion sobre la red Ento
 - /chaucha para informacion sobre la red Chaucha
 - /bitcheke para informacion sobre la red bitcheke (?)
 - /profit "crypto" "hashrate" "unidad" para informacion sobre profitability (solo LUKA por ahora)
+- /price "crypto" para informacion sobre el precio (solo LUKA por ahora)
 - /help para obtener informacion sobre el bot y su uso
 
 ### Herramientas de desarrollo
