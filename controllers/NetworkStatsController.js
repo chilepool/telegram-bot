@@ -8,20 +8,19 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
     get routes() {
         return {
             'getLukaStats': 'getLukaStats',
-            'getEntoStats': 'getEntoStats',
-            'getProsusStats': 'getProsusStats', 
-            'getChauchaStats': 'getChauchaStats', 
-            'getBitchekeStats': 'getBitchekeStats', 
-            'getProfits': 'getProfits', 
+            'getProsusStats': 'getProsusStats',
+            'getChauchaStats': 'getChauchaStats',
+            'getBitchekeStats': 'getBitchekeStats',
+            'getProfits': 'getProfits',
+            'getPrice': 'getPrice',
             'getHelp': 'getHelp'
         };
-    }    
+    }
 
      getHelp($) {
         var help =  '\u{1F310} [ChilePool](http://www.chilepool.cl) Bot v0.0.1\n' +
                     '\u{1F913} [GitHub](https://github.com/chilepool/telegram-bot)\n\n' +
                     '/luka Estadistica de *LUKA*\n'+
-                    '/ento Estadistica de *ENTO*\n'+
                     '/prosus Estadistica de *PROSUS*\n'+
                     '/chaucha Estadistica de *CHAUCHA*\n' +
                     '/profit "crypto" "hashrate" "unidad" calculo de profit (LUK)\n\n' +
@@ -30,22 +29,13 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
     }
 
     getBitchekeStats($) {
-        var stats =  '\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}';         
+        var stats =  '\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}';
         return $.sendMessage(stats, { parse_mode: 'Markdown' });
-    }
-    
-    //TODO: To be refactored so we can use a single call with arguments for each coin
-    getLukaStats($) {
-        statsFetcher.getLukaStats().then((message) => { 
-            return $.sendMessage(message, { parse_mode: 'Markdown' });
-        }, (error) => {
-            console.log(error);
-        });
     }
 
     //TODO: To be refactored so we can use a single call with arguments for each coin
-    getEntoStats($) {
-        statsFetcher.getEntoStats().then((message) => { 
+    getLukaStats($) {
+        statsFetcher.getLukaStats().then((message) => {
             return $.sendMessage(message, { parse_mode: 'Markdown' });
         }, (error) => {
             console.log(error);
@@ -54,16 +44,16 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
 
     //TODO: To be refactored so we can use a single call with arguments for each coin
     getProsusStats($) {
-        statsFetcher.getProsusStats().then((message) => { 
+        statsFetcher.getProsusStats().then((message) => {
             return $.sendMessage(message, { parse_mode: 'Markdown' });
         }, (error) => {
             console.log(error);
         });
     }
-    
+
     //TODO: To be refactored so we can use a single call with arguments for each coin
     getChauchaStats($) {
-        statsFetcher.getChauchaStats().then((message) => { 
+        statsFetcher.getChauchaStats().then((message) => {
             return $.sendMessage(message, { parse_mode: 'Markdown' });
         }, (error) => {
             console.log(error);
@@ -75,6 +65,17 @@ class NetworkStatsController extends Telegram.TelegramBaseController {
         var args = $.message.text.toUpperCase().split(' ');
         if (args[1] === 'LUK' || args[1] === 'LUKA') {
             statsFetcher.getLukaProfits(args).then((message) => {
+                return $.sendMessage(message, { parse_mode: 'Markdown' });
+            }, (error) => {
+                console.log(error);
+            });
+        }
+    }
+
+    getPrice($) {
+        var args = $.message.text.toUpperCase().split(' ');
+        if (args[1] === 'LUK' || args[1] === 'LUKA') {
+            statsFetcher.getLukaPrice(args[1]).then((message) => {
                 return $.sendMessage(message, { parse_mode: 'Markdown' });
             }, (error) => {
                 console.log(error);
