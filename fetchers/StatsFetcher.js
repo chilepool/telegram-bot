@@ -38,8 +38,8 @@ class StatsFetcher {
                     var message =   '*Valor de LuKa '     + numeral(obj.market).format('0,0') + ' CLP * \u{1F4B5}\ \n'   +
                                     'Precio compra: *'    +  numeral(obj.sell).format('0,0') +'* CLP \u{2705}\n' +
                                     'Precio venta: *'     +  numeral(obj.buy).format('0,0')  +'* CLP \u{274C}\n' +
-                                    'Volumen transado: *' +  numeral(obj.stats.volume).format('0,0') +'* LUKs \u{1F4B8}\n' +
-                                    'Variación: *'        +  numeral(obj.stats.variation).format('0.00') +'%* ' + variationStock;
+                                    'Volumen transado (24h): *' +  numeral(obj.stats.volume).format('0,0') +'* LUKs \u{1F4B8}\n' +
+                                    'Variación (24h): *'        +  numeral(obj.stats.variation).format('0.00') +'%* ' + variationStock;
                     console.log(message);
                     resolve(message);
                 } else {
